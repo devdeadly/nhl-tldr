@@ -14,8 +14,9 @@ class Team extends Component {
       console.log(this.props.match.params.id);
         axios.get(`http://localhost:8000/api/players/${this.props.match.params.id}`)
             .then(resp => {
+                console.log(resp);
                 this.setState(() => ({
-                    players: resp.data.data
+                    players: resp.data
                 }))
             })
     }

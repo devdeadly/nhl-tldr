@@ -6,40 +6,26 @@ export default class PlayerCard extends Component {
 
   state = {
     imageUrl: '',
-    fullName: `${this.props.player.firstName} ${this.props.player.lastName}`,
-    // ready: false
+    fullName: `${this.props.firstName} ${this.props.lastName}`,
   }
 
   constructor(props) {
     super(props);
-    // setTimeout(() => {
-    //   this.setState(() => ({
-    //     ready: true
-    //   }))
-    // }, 2000)
-
+    console.log(props);
   }
   componentDidMount() {
     console.log(this.state.fullName);
-    // axios.get(`http://localhost:8000/api/image/${this.state.fullName}`)
-    //   .then(resp => {
-    //     this.setState(() => ({
-    //       imageUrl: resp.data.imageUrl
-    //     }))
-    //   })
   }
   render() {
-    const { jerseyNumber, player: { imageUrl } } = this.props;
+    const { jerseyNumber, playerId } = this.props;
     const { fullName } = this.state;
-    // if (!this.state.ready) {
-    //   return ''
-    // }
+
     return (
       <Link to="/">
         <div className="card has-text-centered">
           <div className="card-image">
             <figure className="image is-square">
-              <img src={`http://files.eliteprospects.com/layout/players/${imageUrl}`} />
+              <img src={`https://nhl.bamcontent.com/images/headshots/current/168x168/${playerId}@2x.jpg`} />
             </figure>
           </div>
           <div className="card-content">
@@ -53,6 +39,3 @@ export default class PlayerCard extends Component {
     )
   }
 }
-
-{/* <img src={this.state.imageUrl} alt={this.props.name} />
-<h5>{this.props.player.name}</h5> */}

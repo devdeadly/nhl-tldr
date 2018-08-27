@@ -1,10 +1,10 @@
 const express = require('express');
 const axios = require('axios');
-const google = require('google');
 const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
+const { addNhlIdToPlayer } = require('./utils/utils');
 const PORT = 8000;
 
 const API_KEY = 'bf502ce7a9ca22442373e4e3d590895d';
@@ -99,50 +99,22 @@ app.get('/api/players/:teamId', (req, res) => {
               player.caphit,player.contract,player.dateOfBirth,playerPositionteam.id,team.imageUrl,
               GP,G,A,TP,PM,PIM,GGP,jerseyNumber`
     }
-  }).then(response => {
-    const players = response.data.data;
-    
-    // getPlayersNhlId(players).then((data) => {
-    //   console.log('test', data);
-    // });
+  }).then(({ data }) => {
+    const players = data.data; // array of player data
+    const requests = players.map((player, index) => {
+      return new Promise((resolve) => {
+        setTimeout(() => {
+          resolve(addNhlIdToPlayer(player))
+        }, index * 100);
+      });
+    });
+
+    Promise.all(requests).then((players) => {
+      res.json(players);
+    });
 
   });
 });
-
-const getPlayersNhlId = (players) => {
-  return new Promise((resolve, reject) => {
-    resolve(
-      players.map((player, index) => {
-        // setTimeout(() => {
-          return player.firstName + " plays for the Avs";
-        // }, index * 1000);
-      })
-
-      // players.map((player, index) => {
-      //   setTimeout(() => {
-      //     google(`${player.firstName} ${player.lastName} stats and news nhl`, (err, resp) => {
-      //       if (err) {
-      //        console.log(err)
-      //       } else {
-      //        let playerID = '';
-      //        if (resp) {
-      //         const link = resp.links[0];
-      //         playerID = link.href.substr(-7);
-      //        }
-      //        imageUrl = `https://nhl.bamcontent.com/images/headshots/current/168x168/${playerID}@2x.jpg`;
-      //       }
-      //      });
-      //   }, index * 2000);
-      // });
-
-    );
-  })
-}
-
-getPlayersNhlId(avsPlayers).then((data) => {
-  console.log(data);
-});
-
 
 app.listen(PORT, () => {
   console.log(`Listening on ${PORT}`);
