@@ -8,7 +8,7 @@ class App extends Component {
       <div>
         <Hero />
         <div className="container">
-        <Main />
+          <Main />
         </div>
       </div>
     );

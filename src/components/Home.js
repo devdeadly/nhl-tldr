@@ -1,36 +1,33 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PlayerCard from './PlayerCard';
 import TeamCard from './TeamCard';
-import TeamsAPI from '../teams';
+import TeamsApi from '../api/teams';
 
 class Home extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      photo: '',
       teams: [],
-      players: [],
-      test: [1,2]
     }
   }
   
   componentDidMount() {
     axios.get('http://localhost:8000/api/teams')
-      .then(resp => {
+      .then(({data}) => {
         this.setState(() => ({
-          teams: resp.data.teams.data
+          teams: data
         }));
       });
   }
 
   render() {
+    const {teams} = this.state;
     return (
         <div className="columns is-multiline">
           {
-            TeamsAPI.teams.map(team => {
+            teams.map(team => {
               return (
-                <div className="column is-one-quarter">
+                <div className="column is-2">
                   <TeamCard {...team} />
                 </div>
               )

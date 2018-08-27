@@ -9,14 +9,15 @@ class Team extends Component {
     }
     constructor(props) {
         super(props);
+        console.log(props);
     }
     componentDidMount = () => {
       console.log(this.props.match.params.id);
         axios.get(`http://localhost:8000/api/players/${this.props.match.params.id}`)
-            .then(resp => {
-                console.log(resp);
+            .then(({data}) => {
+              console.log(data.roster);
                 this.setState(() => ({
-                    players: resp.data
+                    players: data.roster
                 }))
             })
     }
@@ -28,7 +29,7 @@ class Team extends Component {
                 {
                     players.map(player => {
                         return (
-                            <div className="column is-one-quarter">
+                            <div className="column is-2">
                                 <PlayerCard {...player} />
                             </div>
                         )
