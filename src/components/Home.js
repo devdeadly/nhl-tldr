@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TeamCard from './TeamCard';
-import TeamsApi from '../api/teams';
 
 class Home extends Component {
   constructor(props) {
@@ -10,10 +9,10 @@ class Home extends Component {
       teams: [],
     }
   }
-  
+
   componentDidMount() {
     axios.get('http://localhost:8000/api/teams')
-      .then(({data}) => {
+      .then(({ data }) => {
         this.setState(() => ({
           teams: data
         }));
@@ -21,19 +20,19 @@ class Home extends Component {
   }
 
   render() {
-    const {teams} = this.state;
+    const { teams } = this.state;
     return (
-        <div className="columns is-multiline">
-          {
-            teams.map(team => {
-              return (
-                <div className="column is-2">
-                  <TeamCard {...team} />
-                </div>
-              )
-            })
-          }
-        </div>
+      <div className="columns is-multiline is-mobile">
+        {
+          teams.map((team, i) => {
+            return (
+              <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
+                <TeamCard {...team} />
+              </div>
+            )
+          })
+        }
+      </div>
     );
   }
 }

@@ -7,7 +7,7 @@ export default (props) => (
     <div className="card">
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src={`http://localhost:8000/static/teams/${getTeamImageUrl(props.id)}`} />
+          <img src={`http://localhost:8000/static/teams/${getTeamImageUrl(props.id)}`} alt={`${props.name} Logo`}/>
         </figure>
       </div>
       <div className="card-content">
