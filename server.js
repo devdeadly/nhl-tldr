@@ -4,15 +4,15 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const morgan = require('morgan');
 
-const PORT = 8000;
+const PORT = process.env.PORT || 8000;
 
-const BASE_URL = 'https://statsapi.web.nhl.com/api/v1';
+const NHL_API_URL = 'https://statsapi.web.nhl.com/api/v1';
 
 const app = express();
 
+// middlewares
 app.use(bodyParser.json());
 app.use(morgan('dev'));
-app.use('/static', express.static(path.join(__dirname, 'static')));
 app.use((req, res, next) => {
   res.set({
     'Access-Control-Allow-Origin': '*',
@@ -23,9 +23,11 @@ app.use((req, res, next) => {
   next();
 });
 
+app.use(express.static(path.join(__dirname, 'public')));
+
 // GET list of nhl teams
 app.get('/api/teams', (req, res) => {
-  axios.get(`${BASE_URL}/teams`)
+  axios.get(`${NHL_API_URL}/teams`)
     .then(({ data }) => {
       res.send(data.teams);
     });
@@ -33,7 +35,7 @@ app.get('/api/teams', (req, res) => {
 
 // GET team by id
 app.get('/api/teams/:id', (req, res) => {
-  axios.get(`${BASE_URL}/teams/${req.params.id}`)
+  axios.get(`${NHL_API_URL}/teams/${req.params.id}`)
     .then(({ data }) => {
       res.send(data.teams[0]);
     });
@@ -42,7 +44,7 @@ app.get('/api/teams/:id', (req, res) => {
 
 // GET list of players by team id
 app.get('/api/players/:teamId', (req, res) => {
-  axios.get(`${BASE_URL}/teams/${req.params.teamId}?expand=team.roster`)
+  axios.get(`${NHL_API_URL}/teams/${req.params.teamId}?expand=team.roster`)
     .then(({ data }) => {
       res.send(data.teams[0]);
     });
@@ -51,10 +53,25 @@ app.get('/api/players/:teamId', (req, res) => {
 //GET player info
 app.get('/api/player/:playerId', (req, res) => {
   let response;
-  axios.get(`${BASE_URL}/people/${req.params.playerId}`)
+  axios.get(`${NHL_API_URL}/people/${req.params.playerId}`)
     .then(({ data }) => {
-      res.send(data.people[0]);
-    });
+      response = { ...data.people[0] };
+      return axios.get(`https://restcountries.eu/rest/v2/alpha/${response.nationality}`);
+    })
+    .then(({ data }) => {
+      response = { 
+        ...response, // append to current response obj
+        flagUrl: data.flag 
+      };
+      return axios.get(`${NHL_API_URL}/people/${req.params.playerId}/stats?stats=statsSingleSeason`);
+    })
+    .then(({ data }) => {
+      response = { 
+        ...response, //append to current response obj
+        stats: data.stats[0].splits[0].stat 
+      };
+      res.send(response);
+    })
 });
 
 app.listen(PORT, () => {

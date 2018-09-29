@@ -1,7 +1,64 @@
+* {
+  transition: all .3s ease-in-out;
+}
 .hero {
-    margin-bottom: 20px;
+  margin-bottom: 20px;
 }
 
 .card img {
-    padding: 20px;
-  }
+  padding: 20px;
+}
+
+.slow-spin {
+  -webkit-animation: fa-spin 2s infinite cubic-bezier(.43,.84,.61,.14);
+  animation: fa-spin 2s infinite cubic-bezier(.43,.84,.61,.14);
+}
+
+.is-flag {
+  padding: 0 !important;
+}
+
+#player-card {
+  position: absolute;
+  width: 300px;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  background: rgba(0, 0, 0, 0.2);
+  border-radius: 0 0 0 10px;
+}
+
+#player-card .title {
+  color: rgb(234, 226, 226);
+}
+
+#player-card .subtitle {
+  color: rgb(165, 161, 161);
+}
+#stats-container{
+    left: 0;
+    right: 0;
+    position: absolute;
+    overflow-x: auto;
+    padding: 50px 0;
+    border-radius: 3px;
+}
+
+#stats-container pre {
+  background: gray;
+  color: white;
+  border-radius: 3px;
+}
+
+main {
+  padding: 15px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.d-flex {
+  display: flex;
+}

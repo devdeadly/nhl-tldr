@@ -1,15 +1,15 @@
 import React from 'react';
 import { Switch, Route } from 'react-router-dom';
-import Home from './Home';
-import Player from './Player';
-import Team from './Team';
+import HomeComponent from './Home';
+import PlayerComponent from './Player';
+import TeamComponent from './Team';
 
 export default () => (
     <main>
         <Switch>
-            <Route exact path="/" component={Home}/>
-            <Route path="/team/:id" component={Team}/>
-            <Route path="/player/:id" component={Player}/>
+            <Route exact path="/" component={HomeComponent}/>
+            <Route path="/team/:id" component={TeamComponent}/>
+            <Route path="/player/:id" component={PlayerComponent}/>
         </Switch>
     </main>
 )

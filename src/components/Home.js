@@ -1,8 +1,9 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TeamCard from './TeamCard';
+import { BASE_URL} from './constants';
 
-class Home extends Component {
+class HomeComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -11,7 +12,7 @@ class Home extends Component {
   }
 
   componentDidMount() {
-    axios.get('http://localhost:8000/api/teams')
+    axios.get(`${BASE_URL}/api/teams`)
       .then(({ data }) => {
         this.setState(() => ({
           teams: data
@@ -37,4 +38,4 @@ class Home extends Component {
   }
 }
 
-export default Home;
+export default HomeComponent;

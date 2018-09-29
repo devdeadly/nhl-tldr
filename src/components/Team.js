@@ -1,18 +1,20 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PlayerCard from './PlayerCard';
+import PlayerCardComponent from './PlayerCard';
 import { Link } from 'react-router-dom';
+import { Team } from '../models';
+import { BASE_URL} from './constants';
 
-class Team extends Component {
-
+class TeamComponent extends Component {
 
   constructor(props) {
     super(props);
   }
 
   componentDidMount = () => {
-    axios.get(`http://localhost:8000/api/players/${this.props.match.params.id}`)
+    axios.get(`${BASE_URL}/api/players/${this.props.match.params.id}`)
       .then(({ data }) => {
+        let team = new Team(data);
         this.setState(() => ({
           teamName: data.name,
           players: data.roster.roster
@@ -33,12 +35,12 @@ class Team extends Component {
             <li className="is-active"><Link to={''}>{teamName}</Link></li>
           </ul>
         </nav>
-        <div className="columns is-multiline is-mobile">
+        <div className="columns is-multiline">
           {
             players.map((player, i) => {
               return (
-                <div key={i} className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop">
-                  <PlayerCard {...player} />
+                <div key={i} className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
+                  <PlayerCardComponent {...player} />
                 </div>
               )
             })
@@ -48,4 +50,4 @@ class Team extends Component {
     )
   }
 }
-export default Team;
+export default TeamComponent;

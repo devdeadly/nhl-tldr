@@ -1,12 +1,34 @@
 import React, { Component } from 'react';
 import Hero from './components/Hero';
 import Main from './components/Main';
+import { BASE_URL} from './constants';
 
 class App extends Component {
+
+  state = {
+    isDarkMode: true
+  };
+
+  toggleUi = () => {
+    const { isDarkMode } = this.state;
+    this.setState(() => ({
+      isDarkMode: isDarkMode === true ? false : true
+    }));
+  }
+
   render = () => {
+    const { isDarkMode } = this.state;
+
+    if (!this.state) {
+      return <div>Loading...</div>
+    }
+
     return (
       <div>
-        <Hero />
+        {isDarkMode && (
+          <link rel="stylesheet" href={`${BASE_URL}/themes/dark.css`} />
+        )}
+        <Hero toggleUi={this.toggleUi} isDarkMode={isDarkMode} />
         <div className="container">
           <Main />
         </div>
