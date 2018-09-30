@@ -28,7 +28,7 @@ class App extends Component {
           <link rel="stylesheet" href={`/themes/dark.css`} />
         )}
         <Hero toggleUi={this.toggleUi} isDarkMode={isDarkMode} />
-        <div className="container">
+        <div className="container-fluid">
           <Main />
         </div>
       </div>

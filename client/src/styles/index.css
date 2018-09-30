@@ -1,6 +1,18 @@
 * {
   transition: all .3s ease-in-out;
 }
+
+@media only screen and (max-width: 768px) {
+  .breadcrumb a, .breadcrumb li {
+    font-size: .9em;
+    height: 21px;
+  }
+}
+
+.d-none {
+  display: none !important;
+}
+
 .hero {
   margin-bottom: 20px;
 }

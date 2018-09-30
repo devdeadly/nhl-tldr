@@ -33,15 +33,6 @@ app.get('/api/teams', (req, res) => {
     });
 });
 
-// GET team by id
-app.get('/api/teams/:id', (req, res) => {
-  axios.get(`${NHL_API_URL}/teams/${req.params.id}`)
-    .then(({ data }) => {
-      res.send(data.teams[0]);
-    });
-});
-
-
 // GET list of players by team id
 app.get('/api/players/:teamId', (req, res) => {
   axios.get(`${NHL_API_URL}/teams/${req.params.teamId}?expand=team.roster`)
@@ -68,8 +59,9 @@ app.get('/api/player/:playerId', (req, res) => {
     .then(({ data }) => {
       response = { 
         ...response, //append to current response obj
-        stats: data.stats[0].splits[0].stat 
+        stats: data.stats[0].splits
       };
+      console.log(response);
       res.send(response);
     })
 });

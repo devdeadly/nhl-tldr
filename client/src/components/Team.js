@@ -6,10 +6,6 @@ import { Team } from '../models';
 
 class TeamComponent extends Component {
 
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount = () => {
     axios.get(`/api/players/${this.props.match.params.id}`)
       .then(({ data }) => {
@@ -20,12 +16,22 @@ class TeamComponent extends Component {
         }))
       });
   }
+
+  removePlayerCard = () => {
+    console.log('parent removePlayerCard');
+    console.log(this.state);
+    this.setState(() => ({
+      removePlayerCard: true
+    }));
+  }
+
   render = () => {
-    if (!this.state){
+    if (!this.state) {
       return null;
     }
 
     const { players, teamName } = this.state;
+
     return (
       <div>
         <nav className="breadcrumb" aria-label="breadcrumbs">
@@ -38,9 +44,7 @@ class TeamComponent extends Component {
           {
             players.map((player, i) => {
               return (
-                <div key={i} className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
-                  <PlayerCardComponent {...player} />
-                </div>
+                <PlayerCardComponent key={i} {...player} removePlayerCard={this.removePlayerCard} />
               )
             })
           }
