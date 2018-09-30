@@ -1,14 +1,13 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import TeamsApi from '../api/teams';
-import { BASE_URL} from './constants';
 
 export default (props) => (
   <Link to={`/team/${props.id}`}>
     <div className="card">
       <div className="card-image">
         <figure className="image is-4by3">
-          <img src={`${BASE_URL}/teams/${getTeamImageUrl(props.id)}`} alt={`${props.name} Logo`}/>
+          <img src={`/teams/${getTeamImageUrl(props.id)}`} alt={`${props.name} Logo`}/>
         </figure>
       </div>
       <div className="card-content">

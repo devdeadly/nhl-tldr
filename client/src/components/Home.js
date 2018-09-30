@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import TeamCard from './TeamCard';
-import { BASE_URL} from './constants';
 
 class HomeComponent extends Component {
   constructor(props) {
@@ -12,7 +11,7 @@ class HomeComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${BASE_URL}/api/teams`)
+    axios.get(`/api/teams`)
       .then(({ data }) => {
         this.setState(() => ({
           teams: data

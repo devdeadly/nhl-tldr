@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'client/build')));
 
 // GET list of nhl teams
 app.get('/api/teams', (req, res) => {
@@ -72,6 +72,10 @@ app.get('/api/player/:playerId', (req, res) => {
       };
       res.send(response);
     })
+});
+
+app.get('*', (req, res) => {
+  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {

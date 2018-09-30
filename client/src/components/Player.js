@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import { Player } from '../models';
-import { BASE_URL} from './constants';
 
 class PlayerComponent extends Component {
 
@@ -11,7 +10,7 @@ class PlayerComponent extends Component {
   }
 
   componentDidMount() {
-    axios.get(`${BASE_URL}/api/player/${this.props.match.params.id}`)
+    axios.get(`/api/player/${this.props.match.params.id}`)
       .then(({ data }) => {
         const player = new Player(data);
         this.setState(() => ({ 

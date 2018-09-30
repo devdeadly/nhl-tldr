@@ -3,7 +3,6 @@ import axios from 'axios';
 import PlayerCardComponent from './PlayerCard';
 import { Link } from 'react-router-dom';
 import { Team } from '../models';
-import { BASE_URL} from './constants';
 
 class TeamComponent extends Component {
 
@@ -12,7 +11,7 @@ class TeamComponent extends Component {
   }
 
   componentDidMount = () => {
-    axios.get(`${BASE_URL}/api/players/${this.props.match.params.id}`)
+    axios.get(`/api/players/${this.props.match.params.id}`)
       .then(({ data }) => {
         let team = new Team(data);
         this.setState(() => ({

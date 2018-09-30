@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import Hero from './components/Hero';
 import Main from './components/Main';
-import { BASE_URL} from './constants';
 
 class App extends Component {
 
@@ -26,7 +25,7 @@ class App extends Component {
     return (
       <div>
         {isDarkMode && (
-          <link rel="stylesheet" href={`${BASE_URL}/themes/dark.css`} />
+          <link rel="stylesheet" href={`/themes/dark.css`} />
         )}
         <Hero toggleUi={this.toggleUi} isDarkMode={isDarkMode} />
         <div className="container">
