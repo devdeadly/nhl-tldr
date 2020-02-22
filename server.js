@@ -27,15 +27,15 @@ app.use(express.static(path.join(__dirname, 'client/build')));
 
 // GET list of nhl teams
 app.get('/api/teams', (req, res) => {
-  axios.get(`${NHL_API_URL}/teams`)
-    .then(({ data }) => {
-      res.send(data.teams);
-    });
+  axios.get(`${NHL_API_URL}/teams`).then(({ data }) => {
+    res.send(data.teams);
+  });
 });
 
 // GET list of players by team id
 app.get('/api/players/:teamId', (req, res) => {
-  axios.get(`${NHL_API_URL}/teams/${req.params.teamId}?expand=team.roster`)
+  axios
+    .get(`${NHL_API_URL}/teams/${req.params.teamId}?expand=team.roster`)
     .then(({ data }) => {
       res.send(data.teams[0]);
     });
@@ -44,32 +44,37 @@ app.get('/api/players/:teamId', (req, res) => {
 //GET player info
 app.get('/api/player/:playerId', (req, res) => {
   let response;
-  axios.get(`${NHL_API_URL}/people/${req.params.playerId}`)
+  axios
+    .get(`${NHL_API_URL}/people/${req.params.playerId}`)
     .then(({ data }) => {
       response = { ...data.people[0] };
-      return axios.get(`https://restcountries.eu/rest/v2/alpha/${response.nationality}`);
+      return axios.get(
+        `https://restcountries.eu/rest/v2/alpha/${response.nationality}`
+      );
     })
     .then(({ data }) => {
-      response = { 
+      response = {
         ...response, // append to current response obj
-        flagUrl: data.flag 
+        flagUrl: data.flag
       };
-      return axios.get(`${NHL_API_URL}/people/${req.params.playerId}/stats?stats=statsSingleSeason`);
+      return axios.get(
+        `${NHL_API_URL}/people/${req.params.playerId}/stats?stats=statsSingleSeason`
+      );
     })
     .then(({ data }) => {
-      response = { 
+      response = {
         ...response, //append to current response obj
         stats: data.stats[0].splits
       };
       console.log(response);
       res.send(response);
-    })
+    });
 });
 
 app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'client', 'build', 'index.html'));
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
 
 app.listen(PORT, () => {
-  console.log(`Listening on ${PORT}`);
+  console.log(`Server listening on https://localhost:${PORT}`);
 });

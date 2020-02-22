@@ -1,0 +1,92 @@
+html,
+body {
+  margin: 0;
+  padding: 0;
+  min-height: 100vh;
+}
+
+.hero-body {
+  padding: 1rem;
+}
+
+@media only screen and (max-width: 768px) {
+  .breadcrumb a,
+  .breadcrumb li {
+    font-size: 0.9em;
+    height: 21px;
+  }
+}
+
+.d-none {
+  display: none !important;
+}
+
+.hero {
+  margin-bottom: 20px;
+}
+
+.card {
+  border-radius: 50px;
+  background: linear-gradient(225deg, #e6e6e6, #ffffff);
+  box-shadow: -8px 8px 16px #e8e8e8, 8px -8px 16px #ffffff;
+  margin: 1em;
+}
+.card img {
+  padding: 20px;
+}
+
+.slow-spin {
+  -webkit-animation: fa-spin 2s infinite cubic-bezier(0.43, 0.84, 0.61, 0.14);
+  animation: fa-spin 2s infinite cubic-bezier(0.43, 0.84, 0.61, 0.14);
+}
+
+.is-flag {
+  padding: 0 !important;
+}
+
+#player-card {
+  position: absolute;
+  width: 300px;
+  top: 0;
+  right: 0;
+  z-index: 2;
+  border-radius: 50px;
+  background: #3298dc;
+  box-shadow: inset -7px 7px 14px #2b81bb, inset 7px -7px 14px #3aaffd;
+}
+
+#player-card .title {
+  color: rgb(234, 226, 226);
+}
+
+#player-card .subtitle {
+  color: rgb(165, 161, 161);
+}
+#stats-container {
+  left: 0;
+  right: 0;
+  position: absolute;
+  overflow-x: auto;
+  padding: 50px 0;
+  border-radius: 3px;
+}
+
+#stats-container pre {
+  background: gray;
+  color: white;
+  border-radius: 3px;
+}
+
+main {
+  padding: 15px;
+}
+
+.flex-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.d-flex {
+  display: flex;
+}
