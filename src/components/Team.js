@@ -2,12 +2,10 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import PlayerCard from './PlayerCard';
 import { Link } from 'react-router-dom';
-import { Team } from '../models';
 
 class TeamComponent extends Component {
   componentDidMount = () => {
     axios.get(`/api/players/${this.props.match.params.id}`).then(({ data }) => {
-      let team = new Team(data);
       this.setState(() => ({
         teamName: data.name,
         players: data.roster.roster
