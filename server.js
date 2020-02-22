@@ -23,7 +23,7 @@ app.use((req, res, next) => {
   next();
 });
 
-app.use(express.static(path.join(__dirname, 'client/build')));
+app.use(express.static(path.join(__dirname, 'build')));
 
 // GET list of nhl teams
 app.get('/api/teams', (req, res) => {
