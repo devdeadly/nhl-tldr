@@ -20,15 +20,14 @@ class HomeComponent extends Component {
 
   render() {
     const { teams } = this.state;
-    if (!teams.length)
-      <progress className="progress is-large is-primary" max="100"></progress>;
+    if (!teams.length) return null;
     return (
       <div className="columns is-multiline is-mobile">
         {teams.map((team, i) => {
           return (
             <div
               key={i}
-              className="column is-half-mobile is-one-third-tablet is-one-quarter-desktop"
+              className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop"
             >
               <TeamCard {...team} />
             </div>

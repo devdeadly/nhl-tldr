@@ -15,11 +15,7 @@ class PlayerComponent extends Component {
   }
 
   render() {
-    if (!this.state) {
-      return (
-        <progress className="progress is-large is-primary" max="100"></progress>
-      );
-    }
+    if (!this.state) return <div className="loader" />;
 
     const {
       player: {
