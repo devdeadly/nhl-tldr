@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
-import { Player } from '../models';
+import Player from '../models/player';
 import { DEFAULT_PLAYER_PHOTO } from '../constants';
 
 class PlayerComponent extends Component {

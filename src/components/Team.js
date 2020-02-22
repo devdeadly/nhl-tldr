@@ -13,12 +13,6 @@ class TeamComponent extends Component {
     });
   };
 
-  removePlayerCard = () => {
-    this.setState(() => ({
-      removePlayerCard: true
-    }));
-  };
-
   render = () => {
     if (!this.state) return <div className="loader" />;
 
@@ -39,11 +33,12 @@ class TeamComponent extends Component {
         <div className="columns is-multiline">
           {players.map((player, i) => {
             return (
-              <PlayerCard
+              <div
                 key={i}
-                {...player}
-                removePlayerCard={this.removePlayerCard}
-              />
+                className="column is-half-tablet is-one-third-widescreen"
+              >
+                <PlayerCard {...player} />
+              </div>
             );
           })}
         </div>

@@ -2,26 +2,23 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 import TeamsApi from '../api/teams';
 
-export default (props) => (
-  <Link to={`/team/${props.id}`}>
-    <div className="card">
-      <div className="card-image">
-        <figure className="image is-4by3">
-          <img src={`/teams/${getTeamImageUrl(props.id)}`} alt={`${props.name} Logo`}/>
-        </figure>
+export default ({ name, id }) => (
+  <Link to={`/team/${id}`}>
+    {/* MOBILE VIEW */}
+    <div className="mobile-card ">
+      <div>
+        <p className="title is-5 has-text-weight-bold">{name}</p>
       </div>
-      <div className="card-content">
-        <div className="content">
-          <strong>
-            {props.name}
-          </strong>
-        </div>
-      </div>
+
+      <figure className="image  is-128x128">
+        <img src={`/teams/${getTeamImageUrl(id)}`} alt={`${name} Logo`} />
+      </figure>
     </div>
+    {/* DESKTOP VIEW */}
   </Link>
 );
 
-const getTeamImageUrl = (id) => {
-  const team = TeamsApi.find((team) => team.id === id);
+const getTeamImageUrl = id => {
+  const team = TeamsApi.find(team => team.id === id);
   return team.imageUrl;
-}
+};

@@ -12,6 +12,7 @@ class HomeComponent extends Component {
 
   componentDidMount() {
     axios.get(`/api/teams`).then(({ data }) => {
+      console.log('data', data);
       this.setState(() => ({
         teams: data
       }));
@@ -20,14 +21,14 @@ class HomeComponent extends Component {
 
   render() {
     const { teams } = this.state;
-    if (!teams.length) return null;
+    if (!teams.length) return <div className="loader" />;
     return (
-      <div className="columns is-multiline is-mobile">
+      <div className="columns is-multiline">
         {teams.map((team, i) => {
           return (
             <div
               key={i}
-              className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop"
+              className="column is-half-tablet is-one-third-widescreen"
             >
               <TeamCard {...team} />
             </div>

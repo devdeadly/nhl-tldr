@@ -15,37 +15,27 @@ class PlayerCardComponent extends Component {
     } = this.props;
 
     return (
-      <div className="column is-full-mobile is-one-third-tablet is-one-quarter-desktop">
-        <Link to={`/player/${id}`}>
-          <div className="card">
-            <div className="card-image">
-              <figure className="image is-square">
-                <img
-                  src={this.getPlayerPhotoUrl(id)}
-                  onError={e => {
-                    e.target.src = DEFAULT_PLAYER_PHOTO;
-                  }}
-                  alt={fullName}
-                  class="is-rounded"
-                />
-              </figure>
-            </div>
-            <div className="card-content">
-              <div className="media">
-                <div className="media-content">
-                  <p className="title is-5 has-text-weight-bold">{fullName}</p>
-                  <p className="subtitle is-6">{position}</p>
-                </div>
-                <div className="media-right">
-                  <h2 className="title is-3">
-                    {jerseyNumber ? jerseyNumber : ''}
-                  </h2>
-                </div>
-              </div>
-            </div>
+      <Link to={`/player/${id}`}>
+        {/* MOBILE VIEW */}
+        <div className="mobile-card">
+          <div>
+            <p className="title is-5 has-text-weight-bold">{fullName}</p>
+            <p className="subtitle is-6">{position}</p>
+            <p className="title is-4">{jerseyNumber ? jerseyNumber : ''}</p>
           </div>
-        </Link>
-      </div>
+
+          <figure className="image  is-128x128">
+            <img
+              src={this.getPlayerPhotoUrl(id)}
+              onError={e => {
+                e.target.src = DEFAULT_PLAYER_PHOTO;
+              }}
+              alt={fullName}
+              class="is-rounded"
+            />
+          </figure>
+        </div>
+      </Link>
     );
   }
 }

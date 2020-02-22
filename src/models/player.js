@@ -1,4 +1,4 @@
-export class Player {
+export default class Player {
   constructor(playerDto) {
     this.id = playerDto.id;
     this.fullName = playerDto.fullName;
@@ -27,4 +27,4 @@ export class Player {
   getPlayerPhotoUrl(id) {
     return `https://nhl.bamcontent.com/images/headshots/current/168x168/${id}@2x.jpg`;
   }
-};
+}

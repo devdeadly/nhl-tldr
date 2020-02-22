@@ -10,6 +10,11 @@ body {
 .hero-body {
   padding: 1rem;
 }
+/* @media (min-width: 769px) {
+  .hero-body {
+    padding: 1rem;
+  }
+} */
 
 .title,
 .subtitle {
@@ -43,6 +48,22 @@ body {
   padding: 20px;
 }
 
+.mobile-card {
+  display: flex;
+  justify-content: space-between;
+  border-radius: 30px;
+  background: linear-gradient(225deg, #e6e6e6, #ffffff);
+  box-shadow: -8px 8px 16px #e8e8e8, 8px -8px 16px #ffffff;
+  margin: 1em;
+  padding: 1em;
+}
+
+.mobile-card div {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
 .is-flag {
   padding: 0 !important;
 }
@@ -64,15 +85,11 @@ body {
 }
 
 main {
-  padding: 15px;
+  padding: 0 2em;
 }
 
-.flex-container {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
-
-.d-flex {
-  display: flex;
-}
+/* @media (min-width: 769px) {
+  main {
+    padding: 2em;
+  }
+} */
