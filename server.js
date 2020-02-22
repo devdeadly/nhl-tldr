@@ -66,7 +66,7 @@ app.get('/api/player/:playerId', (req, res) => {
         ...response, //append to current response obj
         stats: data.stats[0].splits
       };
-      console.log(response);
+      response;
       res.send(response);
     });
 });

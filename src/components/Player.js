@@ -5,10 +5,6 @@ import { Player } from '../models';
 import { DEFAULT_PLAYER_PHOTO } from '../constants';
 
 class PlayerComponent extends Component {
-  constructor(props) {
-    super(props);
-  }
-
   componentDidMount() {
     axios.get(`/api/player/${this.props.match.params.id}`).then(({ data }) => {
       const player = new Player(data);
@@ -33,7 +29,6 @@ class PlayerComponent extends Component {
         flagUrl,
         primaryNumber,
         nationality,
-        stats,
         photoUrl
       }
     } = this.state;
@@ -55,45 +50,41 @@ class PlayerComponent extends Component {
         </nav>
         <div className="tile is-ancestor">
           <div className="tile is-vertical">
-            <div className="columns">
-              <div className="column">
-                <div id="stats" style={{ position: 'relative' }}>
-                  <div id="player-card" className="card is-hidden-mobile">
-                    <div className="card-image">
-                      <figure className="image is-square">
+            <div id="stats" style={{ position: 'relative' }}>
+              <div class="player-card card is-hidden-mobile">
+                <div className="card-image">
+                  <figure className="image is-square">
+                    <img
+                      src={photoUrl}
+                      onError={e => {
+                        e.target.src = DEFAULT_PLAYER_PHOTO;
+                      }}
+                      alt={fullName}
+                      className="is-rounded"
+                    />
+                  </figure>
+                </div>
+                <div className="card-content">
+                  <div className="media">
+                    <div className="media-content">
+                      <p className="title is-4">{fullName}</p>
+                      <p className="subtitle">{primaryNumber}</p>
+                    </div>
+                    <div className="media-right">
+                      <figure className="image is-48x48">
                         <img
-                          src={photoUrl}
-                          onError={e => {
-                            e.target.src = DEFAULT_PLAYER_PHOTO;
-                          }}
-                          alt={fullName}
-                          className="is-rounded"
+                          className="is-flag"
+                          src={flagUrl}
+                          alt={`${nationality} flag`}
                         />
                       </figure>
                     </div>
-                    <div className="card-content">
-                      <div className="media">
-                        <div className="media-content">
-                          <p className="title is-4">{fullName}</p>
-                          <p className="subtitle">{primaryNumber}</p>
-                        </div>
-                        <div className="media-right">
-                          <figure className="image is-48x48">
-                            <img
-                              className="is-flag"
-                              src={flagUrl}
-                              alt={`${nationality} flag`}
-                            />
-                          </figure>
-                        </div>
-                      </div>
-                    </div>
                   </div>
-                  <pre className="notification is-info">
-                    {JSON.stringify(this.state.player, null, 2)}
-                  </pre>
                 </div>
               </div>
+              <pre className="notification is-info">
+                {JSON.stringify(this.state.player, null, 2)}
+              </pre>
             </div>
           </div>
         </div>

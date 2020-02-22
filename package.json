@@ -1,5 +1,5 @@
 {
-  "name": "nhl-digest",
+  "name": "nhl-tldr",
   "version": "0.1.0",
   "scripts": {
     "server": "node server.js",

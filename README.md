@@ -1,3 +1,3 @@
-# nhl digest
+# nhl-tldr
 
-### [demo](https://cc-nhldigest.herokuapp.com)
+## [view demo](https://nhl-tldr-s464u.herokuapp.com)

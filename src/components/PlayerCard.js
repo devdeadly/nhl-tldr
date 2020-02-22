@@ -33,11 +33,11 @@ class PlayerCardComponent extends Component {
             <div className="card-content">
               <div className="media">
                 <div className="media-content">
-                  <p className="title is-4">{fullName}</p>
-                  <p className="subtitle">{position}</p>
+                  <p className="title is-5 has-text-weight-bold">{fullName}</p>
+                  <p className="subtitle is-6">{position}</p>
                 </div>
                 <div className="media-right">
-                  <h2 className="title is-2">
+                  <h2 className="title is-3">
                     {jerseyNumber ? jerseyNumber : ''}
                   </h2>
                 </div>

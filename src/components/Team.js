@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import axios from 'axios';
-import PlayerCardComponent from './PlayerCard';
+import PlayerCard from './PlayerCard';
 import { Link } from 'react-router-dom';
 import { Team } from '../models';
 
@@ -16,8 +16,6 @@ class TeamComponent extends Component {
   };
 
   removePlayerCard = () => {
-    console.log('parent removePlayerCard');
-    console.log(this.state);
     this.setState(() => ({
       removePlayerCard: true
     }));
@@ -47,7 +45,7 @@ class TeamComponent extends Component {
         <div className="columns is-multiline">
           {players.map((player, i) => {
             return (
-              <PlayerCardComponent
+              <PlayerCard
                 key={i}
                 {...player}
                 removePlayerCard={this.removePlayerCard}
