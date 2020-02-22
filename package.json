@@ -2,10 +2,10 @@
   "name": "nhl-tldr",
   "version": "0.1.0",
   "scripts": {
-    "server": "node server.js",
-    "start": "react-scripts start",
+    "start": "node server.js",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
-    "heroku-postbuild": "npm install && npm run build && npm run server"
+    "heroku-postbuild": "npm install && npm run build"
   },
   "dependencies": {
     "axios": "^0.17.1",
