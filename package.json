@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "scripts": {
     "start": "node server.js",
-    "dev": "react-scripts start",
+    "client": "react-scripts start",
     "build": "react-scripts build",
     "heroku-postbuild": "npm install && npm run build"
   },
