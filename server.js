@@ -27,8 +27,32 @@ app.use(express.static(path.join(__dirname, 'build')));
 
 // GET list of nhl teams
 app.get('/api/teams', (req, res) => {
-  axios.get(`${NHL_API_URL}/teams`).then(({ data }) => {
-    res.send(data.teams);
+  axios.get(`${NHL_API_URL}/standings`).then(({ data }) => {
+    let teams = [];
+    const divisions = data.records;
+    divisions.forEach(d => {
+      const division = d.teamRecords.map(t => {
+        return {
+          id: t.team.id,
+          name: t.team.name,
+          leagueName: d.league.name,
+          leagueRank: parseInt(t.leagueRank, 10),
+          divisionName: d.division.name,
+          divisionRank: parseInt(t.divisionRank, 10),
+          conferenceName: d.conference.name,
+          conferenceRank: parseInt(t.conferenceRank, 10),
+          gamesPlayed: t.gamesPlayed,
+          wins: t.leagueRecord.wins,
+          losses: t.leagueRecord.losses,
+          ot: t.leagueRecord.ot,
+          points: t.points,
+          regulationWins: t.regulationWins,
+          row: t.row
+        };
+      });
+      teams = [...teams, ...division];
+    });
+    res.send(teams);
   });
 });
 

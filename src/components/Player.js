@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import axios from 'axios';
 import { Link } from 'react-router-dom';
 import Player from '../models/player';
-import { DEFAULT_PLAYER_PHOTO } from '../constants';
+import DEFAULT_PLAYER_PHOTO from '../img/silhouette.jpg';
 
 class PlayerComponent extends Component {
   componentDidMount() {
@@ -47,7 +47,7 @@ class PlayerComponent extends Component {
         <div className="tile is-ancestor">
           <div className="tile is-vertical">
             <div id="stats" style={{ position: 'relative' }}>
-              <div class="player-card card is-hidden-mobile">
+              <div className="player-card card is-hidden-mobile">
                 <div className="card-image">
                   <figure className="image is-square">
                     <img
