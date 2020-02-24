@@ -10,46 +10,46 @@ export default ({ id, name, rank, gp, w, l, ot, p, rw, row }) => {
 
         <div>
           <p className="is-5 has-text-weight-bold">{name}</p>
-          <nav className="level is-mobile">
-            <div className="level-item has-text-centered">
+          <nav className="level is-mobile has-text-centered">
+            <div className="level-item">
               <div>
-                <p className="heading">gp</p>
-                <p className="subtitle">{gp}</p>
-              </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">w</p>
-                <p className="subtitle">{w}</p>
-              </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">l</p>
-                <p className="subtitle">{l}</p>
-              </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">ot</p>
-                <p className="subtitle">{ot}</p>
-              </div>
-            </div>
-            <div className="level-item has-text-centered">
-              <div>
-                <p className="heading">p</p>
+                <p className="heading">P</p>
                 <p className="subtitle">{p}</p>
               </div>
             </div>
-            <div className="level-item has-text-centered">
+            <div className="level-item">
               <div>
-                <p className="heading">rw</p>
+                <p className="heading">GP</p>
+                <p className="subtitle">{gp}</p>
+              </div>
+            </div>
+            <div className="level-item">
+              <div>
+                <p className="heading">W</p>
+                <p className="subtitle">{w}</p>
+              </div>
+            </div>
+            <div className="level-item">
+              <div>
+                <p className="heading">L</p>
+                <p className="subtitle">{l}</p>
+              </div>
+            </div>
+            <div className="level-item">
+              <div>
+                <p className="heading">OT</p>
+                <p className="subtitle">{ot}</p>
+              </div>
+            </div>
+            <div className="level-item">
+              <div>
+                <p className="heading">RW</p>
                 <p className="subtitle">{rw}</p>
               </div>
             </div>
-            <div className="level-item has-text-centered">
+            <div className="level-item">
               <div>
-                <p className="heading">row</p>
+                <p className="heading">ROW</p>
                 <p className="subtitle">{row}</p>
               </div>
             </div>

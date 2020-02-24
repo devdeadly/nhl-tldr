@@ -40,7 +40,7 @@ class HomeComponent extends Component {
     });
   }
 
-  handleFilterClick = e => {
+  handleFilterChange = e => {
     const filter = e.target.value;
     switch (filter) {
       case FILTERS.LEAGUE:
@@ -133,10 +133,10 @@ class HomeComponent extends Component {
     return (
       <section>
         <div className="flex justify-center">
-          <div
+          {/* <div
             id="filter-buttons"
             className="buttons are-small has-addons"
-            onClick={this.handleFilterClick}
+            onClick={this.handleFilterChange}
           >
             <button className="button" value={FILTERS.LEAGUE}>
               league
@@ -159,6 +159,19 @@ class HomeComponent extends Component {
             <button className="button" value={FILTERS.ATLANTIC}>
               atlantic
             </button>
+          </div> */}
+          <div id="filter-select" className="select is-small is-rounded">
+            <select onChange={this.handleFilterChange}>
+              <option value={FILTERS.LEAGUE}>{FILTERS.LEAGUE}</option>
+              <option value={FILTERS.WESTERN}>{FILTERS.WESTERN}</option>
+              <option value={FILTERS.EASTERN}>{FILTERS.EASTERN}</option>
+              <option value={FILTERS.CENTRAL}>{FILTERS.CENTRAL}</option>
+              <option value={FILTERS.PACIFIC}>{FILTERS.PACIFIC}</option>
+              <option value={FILTERS.METROPOLITAN}>
+                {FILTERS.METROPOLITAN}
+              </option>
+              <option value={FILTERS.ATLANTIC}>{FILTERS.ATLANTIC}</option>
+            </select>
           </div>
         </div>
 

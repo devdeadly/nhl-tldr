@@ -35,7 +35,7 @@ body {
 }
 
 .hero {
-  margin-bottom: 20px;
+  /* margin-bottom: 20px; */
 }
 
 .card {
@@ -103,6 +103,7 @@ body {
   height: 100px;
   width: 100px;
 }
+
 main {
   padding: 0 1em;
   overflow: hidden;
@@ -130,7 +131,7 @@ main {
 .justify-center {
   justify-content: center;
 }
-
+/* 
 #filter-buttons button {
   font-size: 0.5em;
   border: 1px solid gray;
@@ -156,4 +157,14 @@ main {
 #filter-buttons button:last-child {
   border-top-right-radius: 10px;
   border-bottom-right-radius: 10px;
+} */
+
+#filter-select {
+  margin-bottom: 1em;
+}
+
+@media only screen and (min-width: 768px) {
+  #filter-select {
+    margin-bottom: 2em;
+  }
 }
