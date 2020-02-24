@@ -6,6 +6,7 @@ import { Link } from 'react-router-dom';
 class TeamComponent extends Component {
   componentDidMount = () => {
     axios.get(`/api/roster/${this.props.match.params.id}`).then(({ data }) => {
+      console.log('d', data);
       this.setState(() => ({
         teamName: data.name,
         players: data.roster.roster
