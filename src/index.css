@@ -1,9 +1,12 @@
+:root {
+  --main-font-family: 'Montserrat';
+}
 html,
 body {
   margin: 0;
   padding: 0;
   min-height: 100vh;
-  font-family: 'Montserrat', sans-serif;
+  font-family: var(--main-font-family);
   text-transform: lowercase;
 }
 
@@ -99,14 +102,13 @@ body {
   color: #eae2e2;
 }
 
-.is-100x100 {
-  height: 100px;
-  width: 100px;
-}
-
 main {
   padding: 0 1em;
   overflow: hidden;
+}
+
+main .columns {
+  padding-bottom: 1.5em; /* makes sure that the cards box-shadow is not cut off at end of screen*/
 }
 
 .loader {
@@ -124,6 +126,22 @@ main {
   font-size: 0.6em !important;
 }
 
+#filter-select {
+  margin-bottom: 1em;
+}
+
+select {
+  font-family: var(--main-font-family);
+}
+
+@media only screen and (min-width: 768px) {
+  #filter-select {
+    margin-bottom: 2em;
+  }
+}
+
+/* utility */
+
 .flex {
   display: flex;
 }
@@ -131,40 +149,8 @@ main {
 .justify-center {
   justify-content: center;
 }
-/* 
-#filter-buttons button {
-  font-size: 0.5em;
-  border: 1px solid gray;
-  border-radius: 0px;
-  margin-bottom: 3em;
-}
 
-@media only screen and (min-width: 400px) {
-  #filter-buttons button {
-    font-size: 0.7em;
-  }
-}
-
-#filter-buttons button:hover {
-  border: 1px solid black;
-}
-
-#filter-buttons button:first-child {
-  border-top-left-radius: 10px;
-  border-bottom-left-radius: 10px;
-}
-
-#filter-buttons button:last-child {
-  border-top-right-radius: 10px;
-  border-bottom-right-radius: 10px;
-} */
-
-#filter-select {
-  margin-bottom: 1em;
-}
-
-@media only screen and (min-width: 768px) {
-  #filter-select {
-    margin-bottom: 2em;
-  }
+.is-100x100 {
+  height: 100px;
+  width: 100px;
 }
