@@ -5,9 +5,8 @@ import TeamsApi from '../api/teams';
 export default ({ id, name, rank, gp, w, l, ot, p, rw, row }) => {
   return (
     <Link to={`/team/${id}`}>
-      <div className="mobile-card ">
+      <div className="neumorphic-card">
         <span className="tag is-info">{rank}</span>
-
         <div>
           <p className="is-5 has-text-weight-bold">{name}</p>
           <nav className="level is-mobile has-text-centered">

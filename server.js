@@ -10,7 +10,7 @@ const NHL_API_URL = 'https://statsapi.web.nhl.com/api/v1';
 
 const app = express();
 
-// middlewares
+// middleware
 app.use(bodyParser.json());
 app.use(morgan('dev'));
 app.use((req, res, next) => {
@@ -56,8 +56,8 @@ app.get('/api/teams', (req, res) => {
   });
 });
 
-// GET list of players by team id
-app.get('/api/players/:teamId', (req, res) => {
+// GET roster by team id
+app.get('/api/roster/:teamId', (req, res) => {
   axios
     .get(`${NHL_API_URL}/teams/${req.params.teamId}?expand=team.roster`)
     .then(({ data }) => {
@@ -90,14 +90,15 @@ app.get('/api/player/:playerId', (req, res) => {
         ...response, //append to current response obj
         stats: data.stats[0].splits
       };
-      response;
       res.send(response);
     });
 });
 
-app.get('*', (req, res) => {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
+if (process.env.NODE_ENV && process.env.NODE_ENV === 'production') {
+  app.get('*', (req, res) => {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 app.listen(PORT, () => {
   console.log(`Server listening on https://localhost:${PORT}`);

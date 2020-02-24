@@ -25,102 +25,89 @@ class HomeComponent extends Component {
     this.state = {
       allTeams: [],
       filteredTeams: [],
-      rankBy: 'leagueRank'
+      rankBy: '',
+      filter: ''
     };
   }
 
-  componentDidMount() {
+  componentDidMount = () => {
     axios.get(`/api/teams`).then(({ data }) => {
-      console.log('data', data);
-      const allTeams = mergeSort(data, this.state.rankBy);
-      this.setState(() => ({
-        allTeams,
-        filteredTeams: allTeams // unfilter teams by default
-      }));
+      this.setState({
+        allTeams: data,
+        filter: localStorage.getItem('nhl-tldr:filter') || 'league'
+      });
+      this.processFilter(this.state.filter);
     });
-  }
+  };
+
+  componentDidUpdate = () => {
+    const select = document.getElementById('filter-select');
+    if (select) select.value = this.state.filter;
+  };
+  filterByLeague = () => {
+    this.setState({ rankBy: RANK_TYPES.LEAUGE }, () => {
+      this.setState({
+        filteredTeams: mergeSort(this.state.allTeams, this.state.rankBy)
+      });
+    });
+  };
+
+  filterByConference = filter => {
+    this.setState({ rankBy: RANK_TYPES.CONFERENCE }, () => {
+      this.setState({
+        filteredTeams: mergeSort(
+          this.state.allTeams.filter(
+            t => t.conferenceName.toLowerCase() === filter
+          ),
+          this.state.rankBy
+        )
+      });
+    });
+  };
+
+  filterByDivision = filter => {
+    this.setState({ rankBy: RANK_TYPES.DIVISION }, () => {
+      this.setState({
+        filteredTeams: mergeSort(
+          this.state.allTeams.filter(
+            t => t.divisionName.toLowerCase() === filter
+          ),
+          this.state.rankBy
+        )
+      });
+    });
+  };
 
   handleFilterChange = e => {
     const filter = e.target.value;
+    this.processFilter(filter);
+    this.setState({ filter });
+  };
+
+  processFilter = filter => {
+    localStorage.setItem('nhl-tldr:filter', filter);
+
     switch (filter) {
       case FILTERS.LEAGUE:
-        this.setState({ rankBy: RANK_TYPES.LEAUGE }, () => {
-          this.setState({
-            filteredTeams: mergeSort(this.state.allTeams, this.state.rankBy)
-          });
-        });
+        this.filterByLeague();
         break;
       case FILTERS.WESTERN:
-        this.setState({ rankBy: RANK_TYPES.CONFERENCE }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.conferenceName.toLowerCase() === FILTERS.WESTERN
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByConference(FILTERS.WESTERN);
         break;
       case FILTERS.EASTERN:
-        this.setState({ rankBy: RANK_TYPES.CONFERENCE }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.conferenceName.toLowerCase() === FILTERS.EASTERN
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByConference(FILTERS.EASTERN);
         break;
       case FILTERS.CENTRAL:
-        this.setState({ rankBy: RANK_TYPES.DIVISION }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.divisionName.toLowerCase() === FILTERS.CENTRAL
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByDivision(FILTERS.CENTRAL);
         break;
       case FILTERS.PACIFIC:
-        this.setState({ rankBy: RANK_TYPES.DIVISION }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.divisionName.toLowerCase() === FILTERS.PACIFIC
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByDivision(FILTERS.PACIFIC);
         break;
       case FILTERS.METROPOLITAN:
-        this.setState({ rankBy: RANK_TYPES.DIVISION }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.divisionName.toLowerCase() === FILTERS.METROPOLITAN
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByDivision(FILTERS.METROPOLITAN);
         break;
       case FILTERS.ATLANTIC:
-        this.setState({ rankBy: RANK_TYPES.DIVISION }, () => {
-          this.setState({
-            filteredTeams: mergeSort(
-              this.state.allTeams.filter(
-                t => t.divisionName.toLowerCase() === FILTERS.ATLANTIC
-              ),
-              this.state.rankBy
-            )
-          });
-        });
+        this.filterByDivision(FILTERS.ATLANTIC);
         break;
       default:
         throw new Error(FILTERS.INVALID);
@@ -133,35 +120,8 @@ class HomeComponent extends Component {
     return (
       <section>
         <div className="flex justify-center">
-          {/* <div
-            id="filter-buttons"
-            className="buttons are-small has-addons"
-            onClick={this.handleFilterChange}
-          >
-            <button className="button" value={FILTERS.LEAGUE}>
-              league
-            </button>
-            <button className="button" value={FILTERS.WESTERN}>
-              western
-            </button>
-            <button className="button" value={FILTERS.EASTERN}>
-              eastern
-            </button>
-            <button className="button" value={FILTERS.CENTRAL}>
-              central
-            </button>
-            <button className="button" value={FILTERS.PACIFIC}>
-              pacific
-            </button>
-            <button className="button" value={FILTERS.METROPOLITAN}>
-              metropolitan
-            </button>
-            <button className="button" value={FILTERS.ATLANTIC}>
-              atlantic
-            </button>
-          </div> */}
-          <div id="filter-select" className="select is-small is-rounded">
-            <select onChange={this.handleFilterChange}>
+          <div className="select is-small is-rounded">
+            <select id="filter-select" onChange={this.handleFilterChange}>
               <option value={FILTERS.LEAGUE}>{FILTERS.LEAGUE}</option>
               <option value={FILTERS.WESTERN}>{FILTERS.WESTERN}</option>
               <option value={FILTERS.EASTERN}>{FILTERS.EASTERN}</option>

@@ -27,11 +27,14 @@ class PlayerCardComponent extends Component {
     return (
       <Link to={`/player/${id}`}>
         {/* MOBILE VIEW */}
-        <div className="mobile-card">
+        <div className="neumorphic-card">
+          <span className="tag is-info">
+            {jerseyNumber ? jerseyNumber : ''}
+          </span>
+
           <div>
             <p className="title is-5 has-text-weight-bold">{fullName}</p>
             <p className="subtitle is-6">{position}</p>
-            <p className="title is-4">{jerseyNumber ? jerseyNumber : ''}</p>
           </div>
 
           <figure className="image is-100x100">

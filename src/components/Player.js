@@ -47,7 +47,7 @@ class PlayerComponent extends Component {
         <div className="tile is-ancestor">
           <div className="tile is-vertical">
             <div id="stats" style={{ position: 'relative' }}>
-              <div className="player-card card is-hidden-mobile">
+              <div className="card is-hidden-mobile">
                 <div className="card-image">
                   <figure className="image is-square">
                     <img
@@ -78,7 +78,7 @@ class PlayerComponent extends Component {
                   </div>
                 </div>
               </div>
-              <pre className="notification is-info">
+              <pre className="notification">
                 {JSON.stringify(this.state.player, null, 2)}
               </pre>
             </div>
